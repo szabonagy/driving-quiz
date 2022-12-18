@@ -3,15 +3,6 @@ import ReactDOM from 'react-dom';
 import App from "./components/App";
 
 
-// var admin = require("firebase-admin");
-
-// var serviceAccount = require("./serviceAccountKey.json");
-
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount)
-// });
-
-
 ReactDOM.render(
   <App />, 
   document.getElementById('root'));

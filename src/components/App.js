@@ -1,14 +1,23 @@
 import React from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import Fail from "./Fail";
 import Success from "./Succes";
 import QuizApp from "./QuizApp"
-import firebaseApp from "../FirebaseConfig";
+import FirebaseAuthService from "./FirebaseAuthService";
+import LoginForm from "./LoginForm";
 import { wrongAnsw } from "./Quiz";
 import { rightAnsw } from "./Quiz";
 import { useState, useEffect } from "react";
 
 
 function App() {
+
+  const [user, setUser] = useState(null);
+
+  FirebaseAuthService.subscribeToAuthChanges(setUser);
 
   const [showComponent, setShowComponent] = useState(false);
   const [showPassed, setPassed] = useState(false);
@@ -39,13 +48,30 @@ function App() {
     };
   },[])
 
-    if (showComponent && !showPassed) {
-      return <Fail />;
-    } if (!failedAnsw && !showPassed && remainQuestions) {
-      return <QuizApp />
-    } if (!failedAnsw && showPassed) {
-      return <Success />
-    } return <Fail />;
-  };
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <QuizApp />
+    },
+    {
+      path: "/fail",
+      element: <Fail />
+    },
+    {
+      path: "/success",
+      element: <Success />
+    },
+    {
+      path: "/login",
+      element: <LoginForm />
+    },
+  ]);
+
+  return(
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    );
+   };
 
 export default App;

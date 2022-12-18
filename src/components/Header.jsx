@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from '../images/logo.png';
 import Timer from './Timer'
 import { qstRemain } from "./Quiz";

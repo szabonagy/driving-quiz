@@ -1,75 +1,54 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Navigate } from "react-router-dom"; 
-import Fail from "./Fail";  
+import { useNavigate } from "react-router-dom";
+
 
 const Timer = () => {
-  
-    // We need ref in this, because we are dealing
-    // with JS setInterval to keep track of it and
-    // stop it when needed
-    const Ref = useRef(null);
+    const navigate = useNavigate();
+
+    let time = localStorage.getItem('time') // get's the item from the local storage
+
+    let remaining = getTimeRemaining(time); // calculates the remaining time based on the data saved to the local storage
+
     
-    // The state for our timer
-    const [timer, setTimer] = useState('30:00');
-  
-  
-    const getTimeRemaining = (e) => {
-        const total = Date.parse(e) - Date.parse(new Date());
-        const seconds = Math.floor((total / 1000) % 60);
-        const minutes = Math.floor((total / 1000 / 60) % 60);
-        return {
-            total, minutes, seconds
-        };
-    }
-  
-    const startTimer = (e) => {
-        let { total, minutes, seconds } 
-                    = getTimeRemaining(e);
+    const intervalReference = useRef(null); // creating a refference variable
+    
+    const [timer, setTimer] = useState(`${remaining.minutes}:${remaining.seconds}`); //actualizes the timer
+    
+    const startTimer = () => {
+        let { total, minutes, seconds } = getTimeRemaining(time); //reads the remaining times
         if (total >= 0) {
-  
-            // update the timer
-            // check if less than 10 then we need to 
-            // add '0' at the beginning of the variable
+            
+            //handle the appearence of the timer, set 0 to front if needed
             setTimer(
                 (minutes > 9 ? minutes : '0' + minutes) + ':'
                 + (seconds > 9 ? seconds : '0' + seconds)
             )
-        } 
+        } else {
+            //if the succes doesn't exist in the local storage then it is equal to 0
+            if(Number(localStorage.getItem('success') ?? "0") >= 22) {
+                navigate('/success') //if the success value grater or equal than 22 then succcessfull test
+            } else {
+                navigate('/fail') // else fail
+            }
+        }
     }
-  
-  
-    const clearTimer = (e) => {
-  
-        // If you adjust it you should also need to
-        // adjust the Endtime formula we are about
-        // to code next    
-        setTimer('30:00');
-  
-        // If you try to remove this line the 
-        // updating of timer Variable will be
-        // after 1000ms or 1sec
-        if (Ref.current) clearInterval(Ref.current);
+    const clearTimer = () => {
+        
+        setTimer('00:00'); //sets the timer to this value when the time runned out
+        
+        // localStorage.setItem('time',new Date(new Date().getTime()+30*60*1000)) //set the time valuest at the start of a test, have to be attached to button!
+
+        if (intervalReference.current) clearInterval(intervalReference.current); //if the refference was set, then stops the old interval
         const id = setInterval(() => {
-            startTimer(e);
+            startTimer();
         }, 1000)
-        Ref.current = id;
-    }
-  
-    const getDeadTime = () => {
-        let deadline = new Date();
-  
-        // This is where you need to adjust if 
-        // you entend to add more time
-        deadline.setSeconds(deadline.getSeconds() + 1800);
-        return deadline;
+        intervalReference.current = id;
     }
 
     useEffect(() => {
-        clearTimer(getDeadTime());
+        clearTimer(); //once happens, clears the timer
     }, []);
     
-
-
     return (
         <div className="top-timer">
             <h2>{timer}</h2>
@@ -77,4 +56,17 @@ const Timer = () => {
     )
 }
   
+//calculating the remaining time based on e parameter
+const getTimeRemaining = (e) => {
+    const total = Date.parse(e) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    return {
+        total, minutes, seconds
+    };
+}
+
 export default Timer;
+
+//localStorage.setItem('time',new Date(new Date().getTime()+1000000))
+//localStorage.setItem('time',new Date(new Date().getTime()+30*60*1000)) //set the time valuest at the start of a test, have to be attached to button!
