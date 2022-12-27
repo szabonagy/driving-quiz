@@ -6,6 +6,7 @@ import {
 import Fail from "./Fail";
 import Success from "./Succes";
 import QuizApp from "./QuizApp"
+import Main from "./Main";
 import FirebaseAuthService from "./FirebaseAuthService";
 import LoginForm from "./LoginForm";
 import { wrongAnsw } from "./Quiz";
@@ -51,6 +52,10 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <Main />
+    },
+    {
+      path: "/quiz",
       element: <QuizApp />
     },
     {
