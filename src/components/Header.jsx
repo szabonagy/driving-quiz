@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import logo from '../images/logo.png';
 import Timer from './Timer'
