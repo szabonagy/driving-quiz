@@ -3,14 +3,14 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Fail from "../public/components/Fail";
-import Success from "../public/components/Succes";
-import QuizApp from "../public/components/QuizApp"
-import Main from "../public/components/Main";
-import FirebaseAuthService from "../public/components/FirebaseAuthService";
+import Fail from "./components/Fail";
+import Success from "./components/Succes";
+import QuizApp from "./components/QuizApp"
+import Main from "./components/Main";
+import FirebaseAuthService from "./components/FirebaseAuthService";
 // eslint-disable-next-line no-unused-vars
-import firebase from "../public/components/FirebaseConfig"
-import LoginForm from "../public/components/LoginForm";
+import firebase from "./FirebaseConfig"
+import LoginForm from "./components/LoginForm";
 // import { wrongAnsw } from "./Quiz";
 // import { rightAnsw } from "./Quiz";
 // eslint-disable-next-line no-unused-vars
