@@ -47,7 +47,7 @@ const Timer = () => {
 
     useEffect(() => {
         clearTimer(); //once happens, clears the timer
-    }, []);
+    }, );
     
     return (
         <div className="top-timer">
