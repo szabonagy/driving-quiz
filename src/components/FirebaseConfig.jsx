@@ -12,10 +12,14 @@ const config = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-const firebaseApp = firebase.initializeApp(config);
+//const firebaseApp = firebase.initializeApp(config);
+
+if(!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
 // Use these for db & auth
 //const db = firebaseApp.firestore();
 //const auth = firebase.auth();
 
-export default firebaseApp;
+export default firebase;

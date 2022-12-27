@@ -9,7 +9,7 @@ import QuizApp from "./QuizApp"
 import Main from "./Main";
 import FirebaseAuthService from "./FirebaseAuthService";
 // eslint-disable-next-line no-unused-vars
-import firebase from "../FirebaseConfig"
+import firebase from "./FirebaseConfig"
 import LoginForm from "./LoginForm";
 // import { wrongAnsw } from "./Quiz";
 // import { rightAnsw } from "./Quiz";

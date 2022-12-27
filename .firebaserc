@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "driving-license-9bf4b"
-  }
+    "default": "driving-license-a1769",
+    "driving-license": "driving-license-a1769"
+  },
+  "targets": {},
+  "etags": {}
 }
