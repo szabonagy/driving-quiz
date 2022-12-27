@@ -25,7 +25,7 @@ function Main() {
             <div className="sections">
                 <hr className="line"  id="home"></hr>
                 <div className="section home" id="home">
-
+                    <h1>hello</h1>
                 </div>
                 <hr className="line"  id="quiz"></hr>
                 <div className="section quiz">
