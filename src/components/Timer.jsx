@@ -36,7 +36,7 @@ const Timer = () => {
         
         setTimer('00:00'); //sets the timer to this value when the time runned out
         
-        localStorage.setItem('time',new Date(new Date().getTime()+30*60*1000)) //set the time valuest at the start of a test, have to be attached to button!
+        //localStorage.setItem('time',new Date(new Date().getTime()+30*60*1000)) //set the time valuest at the start of a test, have to be attached to button!
 
         if (intervalReference.current) clearInterval(intervalReference.current); //if the refference was set, then stops the old interval
         const id = setInterval(() => {
